@@ -26,55 +26,53 @@ angular.module('secretSantaApp')
             }
 
             /* Assign Secret Santa */
-            for (var i = 0; i < list.length; i++) {
-                if ($scope.EmployeeList[i].lastname != list[i].lastname) {
-                    _list.push(list[i]);
+            for (var ii = 0; ii < list.length; ii++) {
+                if ($scope.EmployeeList[ii].lastname !== list[ii].lastname) {
+                    _list.push(list[ii]);
                 } else {
                     _list.push({});
-                    _sort.push(list[i]);
+                    _sort.push(list[ii]);
                 }
             }
 
             /* Fix Empty Slots */
-            for (var i = 0; i < _list.length; i++) {
-                if (_list[i].firstname == undefined) {
-                    _list[i] = _sort.pop();
+            for (var iii = 0; iii < _list.length; iii++) {
+                if (_list[iii].firstname === undefined) {
+                    _list[iii] = _sort.pop();
                 }
             }
 
             /* Repopulate Array */
-            for (var i = 0; i < _sort.length; i++) {
-                if (_sort[i].lastname != undefined) {
-                    if ($scope.EmployeeList[i].lastname == _list[i].lastname) {
-                        _list[i] = _list.pop();
+            for (var iv = 0; iv < _sort.length; iv++) {
+                if (_sort[iv].lastname !== undefined) {
+                    if ($scope.EmployeeList[iv].lastname === _list[iv].lastname) {
+                        _list[iv] = _list.pop();
                     }
                 } 
             }
 
             /* Last Varification */
-            for (var i = 0; i < _list.length; i++) {
-                if ($scope.EmployeeList[i].lastname == _list[i].lastname) {
-                    console.log('gotta do it again!');
+            for (var v = 0; v < _list.length; iv++) {
+                if ($scope.EmployeeList[v].lastname === _list[v].lastname) {
                     $scope.SecretSanta();
-                    return
+                    return;
                 }
-            };
+            }
             $scope.SecretSantaList = _list;
         };
 
         $scope.AddParticipant = function(employee) {
-            if (employee[1] != undefined) {
+            if (employee[1] !== undefined) {
                 $scope.EmployeeList.push({
                     firstname: employee[0],
                     lastname: employee[1]
                 });
             }
-            $scope.employee = "";
+            $scope.employee = '';
         };
 
         $scope.LoadDemo = function() {
             $scope.EmployeeList = DemoLoad;
         };
-        // $scope.LoadDemo();
 
     }]);

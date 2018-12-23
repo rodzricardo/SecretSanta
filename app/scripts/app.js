@@ -8,4 +8,7 @@
  *
  * Main module of the application.
  */
-angular.module('secretSantaApp', ['ngAnimate','ngTouch']);
+
+console.log('\'Allo \'Allo!');
+
+angular.module('secretSantaApp', []);
