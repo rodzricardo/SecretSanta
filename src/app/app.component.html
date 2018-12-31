@@ -1,20 +1,57 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>EMPLOYEES</h2>
+        </div>
+        <div class="col-xs-6">
+            <h2>SECRET SANTA</h2>
+        </div>
+    </div>
+    <!-- LIST OUTPUT -->
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="well">
+                <div *ngFor="let participant of ParticipantList">
+                    <span>{{participant.firstname}} {{participant.lastname}}</span>
+                    <button type="button"
+                            class="btn btn-xs btn-danger pull-right"
+                            (click)="ParticipantList.splice(index, 1)">
+                        DELETE
+                    </button>
+                    <div class="clearfix"><br></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="well">
+                <div *ngFor="let participant of SecretSantaList">
+                    <span>{{participant.firstname}} {{participant.lastname}}</span>
+                    <div class="clearfix"><br></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LIST CONTROLS -->
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="well" style="padding-bottom:0;">
+                <div class="form-group form-inline">
+                    <input type="text" style="width:79%; margin-right: 5px;"
+                           class="newParticipant form-control"
+                           placeholder="First, Last Name"
+                           [(ngModel)]="newParticipant">
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="AddParticipant();">ADD
+                    </button>
+                    <div class="clearfix"><a href="#" (click)="DemoLoad()">Load Demo</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="well">
+                <a href="#" (click)="SecretSanta()" type="submit" class="btn btn-block btn-success">SORT</a>
+            </div>
+        </div>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
