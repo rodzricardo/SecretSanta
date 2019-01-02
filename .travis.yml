@@ -14,5 +14,5 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng e2e
+#  - ng e2e
   - ng build --prod
