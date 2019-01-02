@@ -1,5 +1,7 @@
 # SecretSanta
 
+[![Build Status](https://travis-ci.org/cowglow/SecretSanta.svg?branch=master)](https://travis-ci.org/cowglow/SecretSanta)
+
 Have you ever gotten an interview question that you couldn't answer. This is what this project is all about. 
 That experience was humbling for me. But it also ignited a fire inside which fuel my search for an answer.
 
