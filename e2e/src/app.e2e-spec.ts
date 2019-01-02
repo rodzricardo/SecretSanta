@@ -7,8 +7,8 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display partition label', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to secret-santa!');
+    expect(page.getTitleText()).toEqual('EMPLOYEES');
   });
 });
