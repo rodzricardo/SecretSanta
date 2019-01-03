@@ -11,8 +11,7 @@ branches:
     - master
 
 before_script:
-  - npm install -g @angular/cli
-  - yarn install
+  - yarn install --verbose
 
 script:
   - yarn e2e
