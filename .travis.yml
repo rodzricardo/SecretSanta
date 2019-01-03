@@ -15,5 +15,5 @@ before_script:
   - yarn install
 
 script:
-  - ng e2e
+  - yarn e2e
   - ng build --prod
