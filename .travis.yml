@@ -4,7 +4,7 @@ language: node_js
 node_js:
   - "10.15"
 
-os: osx
+os: darwin x64
 
 branches:
   only:
