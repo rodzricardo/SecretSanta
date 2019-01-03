@@ -6,6 +6,9 @@ node_js:
 
 os: osx
 
+addons:
+  chrome: stable
+
 branches:
   only:
     - master
