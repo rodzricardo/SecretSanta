@@ -68,7 +68,7 @@ $scope.SecretSanta = function() {
     }
 
     /* Last Varification */
-    for (var v = 0; v < _list.length; iv++) {
+    for (var v = 0; v < _list.length; v++) {
         if ($scope.EmployeeList[v].lastname === _list[v].lastname) {
             $scope.SecretSanta();
             return;
