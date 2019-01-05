@@ -19,4 +19,4 @@ before_script:
 
 script:
   - ng e2e
-  - ng build --prod
+  - ng build prod
