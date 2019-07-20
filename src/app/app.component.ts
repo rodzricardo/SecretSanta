@@ -21,62 +21,51 @@ export class AppComponent {
     ParticipantList = [];
     SecretSantaList = [];
 
+    RandomizeParticipants(participants) {
+        for (let i = participants.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = participants[i];
+            participants[i] = participants[j];
+            participants[j] = temp;
+        }
+
+        return participants;
+    }
+
     SecretSanta() {
-        let list = Object.assign([], this.ParticipantList);
-        let _list = [];
-        let _sort = [];
+        const participants = Object.assign([], this.ParticipantList);
 
-        /* Randomize Cloned Array */
-        for (let i = list.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            let temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
-        }
+        const _participants = this.RandomizeParticipants(participants);
 
-        /* Assign Secret Santa */
-        for (let ii = 0; ii < list.length; ii++) {
-            if (this.ParticipantList[ii].lastname !== list[ii].lastname) {
-                _list.push(list[ii]);
-            } else {
-                _list.push({});
-                _sort.push(list[ii]);
+        for (let iv = 0; iv < _participants.length; iv++) {
+            if (this.ParticipantList[iv].lastname === participants[iv].lastname) {
+                participants[iv] = participants.pop();
             }
         }
 
-        /* Fix Empty Slots */
-        for (let iii = 0; iii < _list.length; iii++) {
-            if (_list[iii].firstname === undefined) {
-                _list[iii] = _sort.pop();
-            }
-        }
-
-        /* Repopulate Array */
-        for (let iv = 0; iv < _sort.length; iv++) {
-            if (_sort[iv].lastname !== undefined) {
-                if (this.ParticipantList[iv].lastname === _list[iv].lastname) {
-                    _list[iv] = _list.pop();
-                }
-            }
-        }
-
-        /* Last Varification */
-        for (let v = 0; v < _list.length; v++) {
-            if (this.ParticipantList[v].lastname === _list[v].lastname) {
+        // Validate Sort
+        for (let v = 0; v < _participants.length; v++) {
+            if (this.ParticipantList[v].lastname === _participants[v].lastname) {
                 this.SecretSanta();
                 return;
             }
         }
 
-        this.SecretSantaList = _list;
+        // Validate length match
+        if (_participants.length !== this.ParticipantList.length) {
+            this.SecretSanta();
+            return;
+        }
+
+        this.SecretSantaList = _participants;
     }
 
     AddParticipant() {
-        let newParticipant = this.newParticipant.split(' ');
+        const newParticipant = this.newParticipant.split(' ');
 
         this.ParticipantList.push({
-            'firstname': newParticipant[0],
-            'lastname': newParticipant[1]
+            firstname: newParticipant[0],
+            lastname: newParticipant[1]
         });
 
         this.newParticipant = '';
