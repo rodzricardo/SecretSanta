@@ -7,19 +7,16 @@ Have you ever had an interview question that you couldn't answer?
 
 That's what this project is all about.
 
-For me, that experience was humbling.
+For me, it was a humbling experience. But it ignited a fire that fueled my search for a solution.
 
-But it ignited a fire to search for an answer.
+The question was how would I sort a list of participants in of a [Secret Santa](https://en.wikipedia.org/wiki/Secret_Santa) game and  ensure that siblings (i.e. people with the same last name) would not be matched with one another. So Luke Skywalker wouldn't be paired with his sister Leia Skywalker.
 
-The question was how I would sort a list of people in a [Secret Santa](https://en.wikipedia.org/wiki/Secret_Santa) game and 
-ensure that siblings (i.e. people with the same last name) wouldn't be matched with one another. So Luka Skywalker 
-wouldn't give a gift to his sister Lea Skywalker.
+The original project was generated with [yo angular generator](https://github.com/yeoman/generator-angular) version 0.12.1. But since then, Angular has evolved and Bower has been replaced by Yarn. So I modernized it.
 
-The original project was generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.12.1. But since then, Angular has evolved and Bower has been replaced by Yarn. So I modernized it.
+And refactored once again during a session at the #jscc19
 
 ### The code
-This is what I came up with. We populate the `EmployeeList` with simple objects.
+This is what I came up with. We populate the `ParticipantList` array with simple objects.
 ```
 {
     firstname: 'Luke',
@@ -31,56 +28,45 @@ second array `SecretSantaList`
 
 
 ```
-$scope.EmployeeList = [];
+$scope.ParticipantList = [];
 $scope.SecretSantaList = [];
 
+$scope.RandomizeParticipants = function (participants) {
+    for (let i = participants.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = participants[i];
+        participants[i] = participants[j];
+        participants[j] = temp;
+    }
+    
+    return participants;
+}
+
 $scope.SecretSanta = function() {
-    var list = angular.copy($scope.EmployeeList);
-    var _list = [];
-    var _sort = [];
-
-    /* Randomize Cloned Array */
-    for (var i = list.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = list[i];
-        list[i] = list[j];
-        list[j] = temp;
-    }
-
-    /* Assign Secret Santa */
-    for (var ii = 0; ii < list.length; ii++) {
-        if ($scope.EmployeeList[ii].lastname !== list[ii].lastname) {
-            _list.push(list[ii]);
-        } else {
-            _list.push({});
-            _sort.push(list[ii]);
+    const participants = Object.assign([], this.ParticipantList);
+    const _participants = this.RandomizeParticipants(participants);
+    
+    for (let iv = 0; iv < _participants.length; iv++) {
+        if (this.ParticipantList[iv].lastname === participants[iv].lastname) {
+            participants[iv] = participants.pop();
         }
     }
-
-    /* Fix Empty Slots */
-    for (var iii = 0; iii < _list.length; iii++) {
-        if (_list[iii].firstname === undefined) {
-            _list[iii] = _sort.pop();
-        }
-    }
-
-    /* Repopulate Array */
-    for (var iv = 0; iv < _sort.length; iv++) {
-        if (_sort[iv].lastname !== undefined) {
-            if ($scope.EmployeeList[iv].lastname === _list[iv].lastname) {
-                _list[iv] = _list.pop();
-            }
-        } 
-    }
-
-    /* Last Varification */
-    for (var v = 0; v < _list.length; v++) {
-        if ($scope.EmployeeList[v].lastname === _list[v].lastname) {
-            $scope.SecretSanta();
+    
+    // Validate Sort
+    for (let v = 0; v < _participants.length; v++) {
+        if (this.ParticipantList[v].lastname === _participants[v].lastname) {
+            this.SecretSanta();
             return;
         }
     }
-    $scope.SecretSantaList = _list;
+    
+    // Validate length match
+    if (_participants.length !== this.ParticipantList.length) {
+        this.SecretSanta();
+        return;
+    }
+    
+    return _participants;
 };
 ```
 
