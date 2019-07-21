@@ -13,7 +13,7 @@ The question was how would I sort a list of participants in of a [Secret Santa](
 
 The original project was generated with [yo angular generator](https://github.com/yeoman/generator-angular) version 0.12.1. But since then, Angular has evolved and Bower has been replaced by Yarn. So I modernized it.
 
-And refactored once again during a session at the #jscc19
+And refactored once again during a session at the [#jscc19](https://github.com/jscraftcamp/jscc19-sessions/tree/master/secret-santa).
 
 ### The code
 This is what I came up with. We populate the `ParticipantList` array with simple objects.
